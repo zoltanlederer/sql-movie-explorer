@@ -12,7 +12,6 @@ parser = argparse.ArgumentParser(description='Loading and setting up the databas
 parser.add_argument('--import-path', default='./data/master.csv', help='Path to the CSV file to import.')
 args = parser.parse_args()
 
-
 def load_csv(filepath):
     """Load CSV file with error handling."""
     try:
@@ -43,6 +42,7 @@ def db_exists():
             sys.exit()
 
 
+# this only runs if the file is run directly
 if __name__ == '__main__':
     filepath = Path(args.import_path)
     df = load_csv(filepath)       # fail early if CSV not found
