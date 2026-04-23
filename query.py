@@ -33,7 +33,7 @@ def query(connection, genres=None, year=None, imdb_rating=None, media_type=None,
         conditions.append('title LIKE ?')
         values.append(f'%{title}%')
 
-    base = 'SELECT * FROM media'
+    base = 'SELECT imdb_id, title, year, genres, type, imdb_rating, runtime_mins, directors FROM media'
     if conditions:
         base += ' WHERE ' + ' AND '.join(conditions)
 
