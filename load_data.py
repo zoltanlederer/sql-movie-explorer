@@ -8,10 +8,6 @@ import sys
 import sqlite3
 import pandas as pd
 
-parser = argparse.ArgumentParser(description='Loading and setting up the database.')
-parser.add_argument('--import-path', default='./data/master.csv', help='Path to the CSV file to import.')
-args = parser.parse_args()
-
 def load_csv(filepath):
     """Load CSV file with error handling."""
     try:
@@ -44,6 +40,10 @@ def db_exists():
 
 # this only runs if the file is run directly
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Loading and setting up the database.')
+    parser.add_argument('--import-path', default='./data/master.csv', help='Path to the CSV file to import.')
+    args = parser.parse_args()
+
     filepath = Path(args.import_path)
     df = load_csv(filepath)       # fail early if CSV not found
     db_exists()                   # ask the user if needed, exit if they say q
