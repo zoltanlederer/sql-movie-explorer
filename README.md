@@ -4,7 +4,7 @@ CLI tool to query a personal media library using SQLite and Python.
 
 Takes the master CSV exported by the Media CSV Loader script and loads it into a SQLite database.
 Provides a CLI interface to filter by genre, year, rating, or type (movie vs TV show).
-Results print cleanly in the terminal.
+Results print cleanly in the terminal with an option to export to CSV.
 
 ## Requirements
 
