@@ -13,12 +13,12 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--rating', help='Filter by minimum rating, e.g. "6.5"')
     parser.add_argument('-m', '--media-type', help='Filter by media type. Options: "movie" or "tv_show"')
     parser.add_argument('-t', '--title', help='Filter by title, e.g. "Batman"')
-    parser.add_argument('-o', '--output', default='export.csv', help='Path and filename to save the export CSV e.g. "export.csv" or "/Users/zoli/data/export.csv"')
+    parser.add_argument('-o', '--output', nargs='?', const='export.csv', help='Save results to CSV. Optionally provide a filename, e.g. "results.csv". Defaults to "export.csv" if no filename is given.')
     args = parser.parse_args()
 
-    output = args.output
-
     connection = get_connection()
-
     results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title)
     print(results)
+    if args.output: # save result to CSV
+        results.to_csv(args.output, index=False)
+        print(f'Results saved to {args.output}')
