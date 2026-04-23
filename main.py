@@ -20,5 +20,7 @@ if __name__ == '__main__':
     results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title)
     print(results)
     if args.output: # save result to CSV
-        results.to_csv(args.output, index=False)
+        full_results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title, full=True)
+        full_results.drop(columns=['index'], inplace=True)
+        full_results.to_csv(args.output, index=False)
         print(f'Results saved to {args.output}')
