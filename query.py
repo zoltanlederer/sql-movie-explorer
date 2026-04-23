@@ -26,7 +26,7 @@ def query(connection, genres=None, year=None, imdb_rating=None, media_type=None,
         values.append(imdb_rating)
 
     if media_type:
-        conditions.append('media_type = ?')
+        conditions.append('type = ?')
         values.append(media_type)
         
     if title:
