@@ -21,8 +21,14 @@ if __name__ == '__main__':
     
     if results.shape[0] > 0:
         print('-' * 30)
-        print(f'Found {results.shape[0]} results.')
+        result_word = 'result' if results.shape[0] == 1 else 'results'
+        print(f'Found {results.shape[0]} {result_word}.')
         print('-' * 30)
+
+        # Convert float columns to nullable integers for clean terminal display
+        for col in ['year', 'runtime_mins', 'number_of_seasons', 'number_of_episodes']:
+            results[col] = results[col].astype('Int64')
+
         print(results)
     else:
          print('No results found. Try different filters.')
@@ -32,4 +38,6 @@ if __name__ == '__main__':
             full_results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title, full=True)
             full_results.drop(columns=['index'], inplace=True)
             full_results.to_csv(args.output, index=False)
+            print('-' * 30)
             print(f'Results saved to {args.output}')
+            print('-' * 30)
