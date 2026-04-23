@@ -31,9 +31,9 @@ if __name__ == '__main__':
 
         print(results)
     else:
-         print('No results found. Try different filters.')
+        print('No results found. Try different filters.')
 
-    if args.output: # save result to CSV
+    if args.output: # save results to CSV
         if results.shape[0] > 0:
             full_results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title, full=True)
             full_results.drop(columns=['index'], inplace=True)

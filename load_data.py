@@ -1,5 +1,5 @@
 """
-Loading and setting up the database
+Functions for loading CSV data into the SQLite database.
 """
 
 from pathlib import Path
@@ -45,8 +45,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     filepath = Path(args.import_path)
-    df = load_csv(filepath)       # fail early if CSV not found
-    db_exists()                   # ask the user if needed, exit if they say q
+    df = load_csv(filepath) # fail early if CSV not found
+    db_exists() # ask the user if needed, exit if they say q
     connection = get_connection()
     rows = import_data(df, connection)
     print(f"Database created with {rows} rows.")
