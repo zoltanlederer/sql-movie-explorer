@@ -18,9 +18,18 @@ if __name__ == '__main__':
 
     connection = get_connection()
     results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title)
-    print(results)
+    
+    if results.shape[0] > 0:
+        print('-' * 30)
+        print(f'Found {results.shape[0]} results.')
+        print('-' * 30)
+        print(results)
+    else:
+         print('No results found. Try different filters.')
+
     if args.output: # save result to CSV
-        full_results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title, full=True)
-        full_results.drop(columns=['index'], inplace=True)
-        full_results.to_csv(args.output, index=False)
-        print(f'Results saved to {args.output}')
+        if results.shape[0] > 0:
+            full_results = query(connection, genres=args.genres, year=args.year, imdb_rating=args.rating, media_type=args.media_type, title=args.title, full=True)
+            full_results.drop(columns=['index'], inplace=True)
+            full_results.to_csv(args.output, index=False)
+            print(f'Results saved to {args.output}')
